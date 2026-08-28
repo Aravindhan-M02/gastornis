@@ -859,35 +859,30 @@
     line-height: 1.8;
 }
 
-
 /* ========================================
-   EMAIL CARD
+   PROJECT EMAIL CARD
 ======================================== */
 
 .project-email-card {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
-    max-width: 620px;
+    width: 100%;
+    box-sizing: border-box;
 
     margin-top: 30px;
+    padding: 22px 24px;
 
-    padding:
-        21px 22px;
-
-    border:
-        1px solid #242424;
-
+    border: 1px solid #242424;
     border-radius: 9px;
 
-    background:
-        rgba(255, 255, 255, 0.018);
+    background: rgba(255, 255, 255, 0.018);
 
     color: #ffffff;
-
     text-decoration: none;
+
+    cursor: pointer;
 
     transition:
         border-color 0.3s ease,
@@ -897,49 +892,55 @@
 }
 
 .project-email-card:hover {
-    border-color:
-        rgba(155, 92, 255, 0.55);
+    border-color: rgba(155, 92, 255, 0.65);
 
-    background:
-        rgba(155, 92, 255, 0.045);
+    background: rgba(155, 92, 255, 0.06);
 
-    transform:
-        translateY(-3px);
+    transform: translateY(-3px);
 
     box-shadow:
         0 15px 40px
         rgba(155, 92, 255, 0.08);
 }
 
+
+/* EMAIL CONTENT */
+
 .email-card-content {
     display: flex;
-
     flex-direction: column;
 
-    gap: 8px;
+    gap: 7px;
 }
 
 .email-card-content span {
-    color: #4d4d4d;
+    color: #555555;
 
-    font-size: 0.58rem;
-
+    font-size: 0.65rem;
     font-weight: 600;
 
-    letter-spacing: 0.15em;
+    letter-spacing: 0.16em;
 }
 
 .email-card-content strong {
-    color: #d5d5d5;
+    color: #d6d6d6;
 
-    font-size: 0.9rem;
-
+    font-size: 0.95rem;
     font-weight: 500;
+
+    transition:
+        color 0.3s ease;
 }
 
-.email-arrow {
-    display: inline-flex;
+.project-email-card:hover .email-card-content strong {
+    color: #ffffff;
+}
 
+
+/* EMAIL ARROW */
+
+.email-arrow {
+    display: flex;
     align-items: center;
     justify-content: center;
 
@@ -948,25 +949,49 @@
 
     border-radius: 50%;
 
-    background:
-        rgba(155, 92, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
 
-    color: #9b5cff;
+    color: #777777;
+
+    font-size: 16px;
 
     transition:
-        transform 0.3s ease,
-        background 0.3s ease;
+        color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
 }
 
 .project-email-card:hover .email-arrow {
-    transform:
-        translate(3px, -3px);
+    color: #ffffff;
 
-    background:
-        rgba(155, 92, 255, 0.18);
+    background: rgba(155, 92, 255, 0.18);
+
+    transform: translate(3px, -3px);
 }
 
 
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+    .project-email-card {
+        padding: 18px;
+    }
+
+    .email-card-content strong {
+        font-size: 0.82rem;
+        word-break: break-word;
+    }
+
+    .email-arrow {
+        width: 30px;
+        height: 30px;
+
+        flex-shrink: 0;
+    }
+}
 /* ========================================
    TECHNICAL NOTE
 ======================================== */
