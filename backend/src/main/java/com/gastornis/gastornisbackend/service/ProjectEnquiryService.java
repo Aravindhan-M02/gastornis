@@ -1,33 +1,26 @@
 package com.gastornis.gastornisbackend.service;
 
 import com.gastornis.gastornisbackend.entity.ProjectEnquiry;
-import com.gastornis.gastornisbackend.repository.ProjectEnquiryRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectEnquiryService {
 
-    private final ProjectEnquiryRepository repository;
     private final EmailService emailService;
 
-    public ProjectEnquiryService(
-            ProjectEnquiryRepository repository,
-            EmailService emailService) {
-
-        this.repository = repository;
+    public ProjectEnquiryService(EmailService emailService) {
         this.emailService = emailService;
     }
 
     public ProjectEnquiry saveEnquiry(ProjectEnquiry enquiry) {
 
-        ProjectEnquiry savedEnquiry = repository.save(enquiry);
+        // Send enquiry notification to Gastornis
+        emailService.sendNewEnquiryNotification(enquiry);
 
-        // Email to Gastornis
-        emailService.sendNewEnquiryNotification(savedEnquiry);
+        // Send confirmation email to customer
+        emailService.sendCustomerConfirmation(enquiry);
 
-        // Confirmation email to customer
-        emailService.sendCustomerConfirmation(savedEnquiry);
-
-        return savedEnquiry;
+        // No database saving for now
+        return enquiry;
     }
 }
