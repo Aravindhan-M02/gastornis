@@ -19,7 +19,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:5173",
-                                "https://your-gastornis-frontend.onrender.com"
+                                "https://gastornis.onrender.com"
                         )
                         .allowedMethods(
                                 "GET",
