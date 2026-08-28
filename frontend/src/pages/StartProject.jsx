@@ -164,7 +164,7 @@ function StartProject() {
 
         try {
             const response = await fetch(
-                "http://localhost:8080/api/enquiries",
+                "https://gastornis-backend.onrender.com/api/enquiries",
                 {
                     method: "POST",
                     headers: {
