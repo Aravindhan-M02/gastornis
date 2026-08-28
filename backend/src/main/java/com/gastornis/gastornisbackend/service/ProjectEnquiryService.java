@@ -58,38 +58,6 @@ public class ProjectEnquiryService {
         }
 
         // ============================================================
-        // SEND CONFIRMATION EMAIL TO CUSTOMER
-        // ============================================================
-
-        try {
-
-            System.out.println(
-                    "Sending customer confirmation..."
-            );
-
-            emailService.sendCustomerConfirmation(enquiry);
-
-            System.out.println(
-                    "Customer confirmation sent successfully."
-            );
-
-        } catch (Exception e) {
-
-            System.out.println(
-                    "WARNING: Customer confirmation email could not be sent."
-            );
-
-            e.printStackTrace();
-
-            /*
-             * Again, do not throw the exception.
-             *
-             * The enquiry submission should not fail just because
-             * email delivery failed.
-             */
-        }
-
-        // ============================================================
         // ENQUIRY COMPLETED
         // ============================================================
 
