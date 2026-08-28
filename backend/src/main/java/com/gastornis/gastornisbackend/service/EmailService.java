@@ -1,24 +1,37 @@
 package com.gastornis.gastornisbackend.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gastornis.gastornisbackend.entity.ProjectEnquiry;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmailService {
 
-    private final JavaMailSender mailSender;
+    @Value("${resend.api.key}")
+    private String resendApiKey;
 
-    @Value("${spring.mail.username}")
+    @Value("${resend.from}")
     private String fromEmail;
 
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    private static final String RESEND_API_URL =
+            "https://api.resend.com/emails";
+
+    private final HttpClient httpClient;
+    private final ObjectMapper objectMapper;
+
+    public EmailService(ObjectMapper objectMapper) {
+        this.httpClient = HttpClient.newHttpClient();
+        this.objectMapper = objectMapper;
     }
 
     // ============================================================
@@ -27,34 +40,17 @@ public class EmailService {
 
     public void sendNewEnquiryNotification(ProjectEnquiry enquiry) {
 
-        try {
+        String subject =
+                "New GASTORNIS Project Enquiry — "
+                        + safe(enquiry.getName());
 
-            MimeMessage message = mailSender.createMimeMessage();
-
-            MimeMessageHelper helper =
-                    new MimeMessageHelper(message, true, "UTF-8");
-
-            helper.setFrom(fromEmail);
-            helper.setTo(fromEmail);
-
-            helper.setSubject(
-                    "New GASTORNIS Project Enquiry — "
-                            + safe(enquiry.getName())
-            );
-
-            helper.setText(buildAdminEmail(enquiry), true);
-
-            mailSender.send(message);
-
-        } catch (MessagingException e) {
-
-            throw new RuntimeException(
-                    "Failed to send enquiry notification email.",
-                    e
-            );
-        }
+        sendEmail(
+                fromEmail,
+                fromEmail,
+                subject,
+                buildAdminEmail(enquiry)
+        );
     }
-
 
     // ============================================================
     // SEND CONFIRMATION EMAIL TO CUSTOMER
@@ -62,33 +58,106 @@ public class EmailService {
 
     public void sendCustomerConfirmation(ProjectEnquiry enquiry) {
 
+        sendEmail(
+                fromEmail,
+                enquiry.getEmail(),
+                "We've received your project enquiry — GASTORNIS",
+                buildCustomerEmail(enquiry)
+        );
+    }
+
+    // ============================================================
+    // RESEND API EMAIL SENDER
+    // ============================================================
+
+    private void sendEmail(
+            String from,
+            String to,
+            String subject,
+            String html
+    ) {
+
         try {
 
-            MimeMessage message = mailSender.createMimeMessage();
+            Map<String, Object> emailData = new HashMap<>();
 
-            MimeMessageHelper helper =
-                    new MimeMessageHelper(message, true, "UTF-8");
+            emailData.put("from", from);
+            emailData.put("to", List.of(to));
+            emailData.put("subject", subject);
+            emailData.put("html", html);
 
-            helper.setFrom(fromEmail);
-            helper.setTo(enquiry.getEmail());
+            String jsonBody =
+                    objectMapper.writeValueAsString(emailData);
 
-            helper.setSubject(
-                    "We've received your project enquiry — GASTORNIS"
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(RESEND_API_URL))
+                    .header(
+                            "Authorization",
+                            "Bearer " + resendApiKey
+                    )
+                    .header(
+                            "Content-Type",
+                            "application/json"
+                    )
+                    .POST(
+                            HttpRequest.BodyPublishers.ofString(
+                                    jsonBody,
+                                    StandardCharsets.UTF_8
+                            )
+                    )
+                    .build();
+
+            System.out.println("=================================");
+            System.out.println("SENDING EMAIL THROUGH RESEND");
+            System.out.println("From: " + from);
+            System.out.println("To: " + to);
+            System.out.println("Subject: " + subject);
+            System.out.println("=================================");
+
+            HttpResponse<String> response =
+                    httpClient.send(
+                            request,
+                            HttpResponse.BodyHandlers.ofString()
+                    );
+
+            int statusCode = response.statusCode();
+
+            System.out.println(
+                    "Resend response status: " + statusCode
             );
 
-            helper.setText(buildCustomerEmail(enquiry), true);
+            System.out.println(
+                    "Resend response body: " + response.body()
+            );
 
-            mailSender.send(message);
+            if (statusCode < 200 || statusCode >= 300) {
 
-        } catch (MessagingException e) {
+                throw new RuntimeException(
+                        "Resend email failed. HTTP "
+                                + statusCode
+                                + ": "
+                                + response.body()
+                );
+            }
+
+            System.out.println(
+                    "EMAIL SENT SUCCESSFULLY THROUGH RESEND"
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "ERROR SENDING EMAIL THROUGH RESEND:"
+            );
+
+            e.printStackTrace();
 
             throw new RuntimeException(
-                    "Failed to send customer confirmation email.",
+                    "Failed to send email through Resend.",
                     e
             );
         }
     }
-
 
     // ============================================================
     // GASTORNIS INTERNAL EMAIL
@@ -115,7 +184,7 @@ public class EmailService {
                 ">
 
                     <div style="
-                        width:100%;
+                        width:100%%;
                         padding:40px 15px;
                         box-sizing:border-box;
                     ">
@@ -163,7 +232,6 @@ public class EmailService {
 
                             </div>
 
-
                             <div style="padding:35px;">
 
                                 <div style="
@@ -197,7 +265,6 @@ public class EmailService {
                                     enquiry.getPreferredContact()
                                 ) + """
 
-
                                 <div style="
                                     margin-top:35px;
                                     padding-top:30px;
@@ -230,7 +297,6 @@ public class EmailService {
                                     ) + """
 
                                 </div>
-
 
                                 <div style="
                                     margin-top:35px;
@@ -266,7 +332,6 @@ public class EmailService {
 
                             </div>
 
-
                             <div style="
                                 padding:25px 35px;
                                 background:#fafafa;
@@ -290,7 +355,6 @@ public class EmailService {
                 </html>
                 """;
     }
-
 
     // ============================================================
     // CUSTOMER CONFIRMATION EMAIL
@@ -317,7 +381,7 @@ public class EmailService {
                 ">
 
                     <div style="
-                        width:100%;
+                        width:100%%;
                         padding:40px 15px;
                         box-sizing:border-box;
                     ">
@@ -356,44 +420,44 @@ public class EmailService {
 
                             </div>
 
-
                             <div style="
                                 padding:35px;
                             ">
 
                                 <div style="
-    font-size:18px;
-    font-weight:600;
-    line-height:1.6;
-    margin-bottom:15px;
-">
-    Hi
-    <br>
-    """ + escapeHtml(safe(enquiry.getName())) + """
-</div>
+                                    font-size:18px;
+                                    font-weight:600;
+                                    line-height:1.6;
+                                    margin-bottom:15px;
+                                ">
+                                    Hi
+                                    <br>
+                                    """ + escapeHtml(
+                                        safe(enquiry.getName())
+                                    ) + """
+                                </div>
 
-                               <div style="
-    font-size:15px;
-    line-height:1.8;
-    color:#52525b;
-">
+                                <div style="
+                                    font-size:15px;
+                                    line-height:1.8;
+                                    color:#52525b;
+                                ">
 
-    Thank you for reaching out to
-    <strong style="color:#18181b;">
-        Gastornis
-    </strong>.
+                                    Thank you for reaching out to
+                                    <strong style="color:#18181b;">
+                                        Gastornis
+                                    </strong>.
 
-    We've successfully received your
-    project enquiry.
+                                    We've successfully received your
+                                    project enquiry.
 
-    <br><br>
+                                    <br><br>
 
-    Our team will review your requirements
-    and get back to you through your
-    preferred contact method.
+                                    Our team will review your requirements
+                                    and get back to you through your
+                                    preferred contact method.
 
-</div>
-
+                                </div>
 
                                 <div style="
                                     margin-top:30px;
@@ -435,7 +499,6 @@ public class EmailService {
 
                                 </div>
 
-
                                 <div style="
                                     margin-top:30px;
                                 ">
@@ -467,7 +530,6 @@ public class EmailService {
 
                                 </div>
 
-
                                 <div style="
                                     margin-top:30px;
                                     padding:22px;
@@ -498,7 +560,6 @@ public class EmailService {
                                 </div>
 
                             </div>
-
 
                             <div style="
                                 padding:30px 35px;
@@ -544,7 +605,6 @@ public class EmailService {
                 """;
     }
 
-
     // ============================================================
     // REUSABLE HTML ROW
     // ============================================================
@@ -578,7 +638,6 @@ public class EmailService {
                 """;
     }
 
-
     // ============================================================
     // NULL / EMPTY VALUE HANDLER
     // ============================================================
@@ -589,7 +648,6 @@ public class EmailService {
                 ? "Not provided"
                 : value;
     }
-
 
     // ============================================================
     // HTML ESCAPING

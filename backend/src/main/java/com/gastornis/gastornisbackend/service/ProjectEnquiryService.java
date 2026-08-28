@@ -22,39 +22,80 @@ public class ProjectEnquiryService {
         System.out.println("Project Type: " + enquiry.getProjectType());
         System.out.println("=================================");
 
+        // ============================================================
+        // SEND NOTIFICATION EMAIL TO GASTORNIS
+        // ============================================================
+
         try {
 
             System.out.println("Sending notification email...");
 
             emailService.sendNewEnquiryNotification(enquiry);
 
-            System.out.println("Notification email sent successfully.");
+            System.out.println(
+                    "Notification email sent successfully."
+            );
 
         } catch (Exception e) {
 
-            System.out.println("ERROR sending notification email:");
+            System.out.println(
+                    "WARNING: Notification email could not be sent."
+            );
+
             e.printStackTrace();
 
-            throw e;
+            /*
+             * IMPORTANT:
+             *
+             * We DO NOT throw the exception here.
+             *
+             * If the email service is unavailable,
+             * the enquiry should still be accepted.
+             *
+             * This prevents the frontend from receiving HTTP 500
+             * just because an email failed.
+             */
         }
+
+        // ============================================================
+        // SEND CONFIRMATION EMAIL TO CUSTOMER
+        // ============================================================
 
         try {
 
-            System.out.println("Sending customer confirmation...");
+            System.out.println(
+                    "Sending customer confirmation..."
+            );
 
             emailService.sendCustomerConfirmation(enquiry);
 
-            System.out.println("Customer confirmation sent successfully.");
+            System.out.println(
+                    "Customer confirmation sent successfully."
+            );
 
         } catch (Exception e) {
 
-            System.out.println("ERROR sending customer confirmation:");
+            System.out.println(
+                    "WARNING: Customer confirmation email could not be sent."
+            );
+
             e.printStackTrace();
 
-            throw e;
+            /*
+             * Again, do not throw the exception.
+             *
+             * The enquiry submission should not fail just because
+             * email delivery failed.
+             */
         }
 
-        System.out.println("ENQUIRY COMPLETED SUCCESSFULLY");
+        // ============================================================
+        // ENQUIRY COMPLETED
+        // ============================================================
+
+        System.out.println("=================================");
+        System.out.println("ENQUIRY SUCCESSFULLY PROCESSED");
+        System.out.println("=================================");
 
         return enquiry;
     }
