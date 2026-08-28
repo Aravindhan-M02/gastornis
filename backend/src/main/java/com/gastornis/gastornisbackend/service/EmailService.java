@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class EmailService {
 
-    @Value("${resend.api.key}")
+     @Value("${resend.api.key}")
     private String resendApiKey;
 
     @Value("${resend.from}")
@@ -29,12 +29,10 @@ public class EmailService {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper;
-
-public EmailService() {
-    this.httpClient = HttpClient.newHttpClient();
-    this.objectMapper = new ObjectMapper();
-}
+    public EmailService() {
+        this.httpClient = HttpClient.newHttpClient();
+        this.objectMapper = new ObjectMapper();
+    }
 
     // ============================================================
     // SEND NEW ENQUIRY NOTIFICATION TO GASTORNIS
