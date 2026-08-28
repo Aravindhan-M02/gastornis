@@ -1,0 +1,474 @@
+/* ========================================
+   SELECTED WORK
+======================================== */
+
+.gastornis-work {
+    position: relative;
+    padding: 100px 0;
+    background: #080808;
+}
+
+
+/* ========================================
+   WORK HEADING
+======================================== */
+
+.work-heading {
+    max-width: 900px;
+    margin-bottom: 60px;
+}
+
+.work-heading h2 {
+    margin: 0;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 600;
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+}
+
+.work-heading h2 span {
+    color: #666666;
+}
+
+.work-intro {
+    max-width: 600px;
+    margin-top: 30px;
+    color: #8f8f8f;
+    line-height: 1.8;
+}
+
+
+/* ========================================
+   WORK LIST
+======================================== */
+
+.work-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+
+/* ========================================
+   WORK CARD
+======================================== */
+
+.work-card {
+    position: relative;
+    min-height: 380px;
+    padding: 30px;
+    overflow: hidden;
+
+    border: 1px solid #242424;
+    border-radius: 8px;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(155, 92, 255, 0.07),
+            transparent 35%
+        ),
+        #0b0b0b;
+
+    transition:
+        transform 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.work-card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(155, 92, 255, 0.45);
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.45),
+        0 0 35px rgba(155, 92, 255, 0.08);
+}
+
+
+/* ========================================
+   CARD TOP
+======================================== */
+
+.work-card-top {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.work-number {
+    color: #9b5cff;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.work-category {
+    color: #777777;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+}
+
+.work-year {
+    color: #555555;
+    font-size: 0.75rem;
+}
+
+
+/* ========================================
+   CARD CONTENT
+======================================== */
+
+.work-card-content {
+    position: absolute;
+
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+
+    z-index: 2;
+
+    max-width: 500px;
+}
+
+.work-card-content h3 {
+    margin: 0;
+
+    font-size: clamp(2rem, 3.2vw, 3.5rem);
+    font-weight: 500;
+
+    line-height: 1;
+    letter-spacing: -0.045em;
+
+    transition:
+        transform 0.5s ease,
+        color 0.4s ease;
+}
+
+.work-card:hover .work-card-content h3 {
+    transform: translateX(6px);
+}
+
+.work-card-content p {
+    max-width: 470px;
+
+    margin-top: 20px;
+
+    color: #888888;
+
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ========================================
+   PROJECT BUTTON / LINK
+======================================== */
+
+.work-button {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 25px;
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* ========================================
+   PROJECT ARROW
+======================================== */
+
+.work-button span {
+    color: #9b5cff;
+
+    font-size: 1.1rem;
+    line-height: 1;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+
+/* ========================================
+   PROJECT BUTTON HOVER
+======================================== */
+
+.work-button:hover {
+    color: #9b5cff;
+
+    text-decoration: none;
+}
+
+.work-button:hover span {
+    transform: translate(4px, -4px);
+    color: #9b5cff;
+}
+
+
+/* ========================================
+   LIVE DEMO UNAVAILABLE
+======================================== */
+
+.work-unavailable {
+    display: inline-flex;
+
+    min-height: 20px;
+
+    color: #555555;
+
+    cursor: default;
+
+    user-select: none;
+
+    pointer-events: none;
+
+    text-decoration: none;
+}
+
+.work-unavailable:hover {
+    color: #555555;
+
+    text-decoration: none;
+}
+
+
+/* ========================================
+   CARD VISUAL
+======================================== */
+
+.work-card-visual {
+    position: absolute;
+
+    top: 50%;
+    right: 8%;
+
+    width: 260px;
+    height: 260px;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   GLOWING ORB
+======================================== */
+
+.visual-orb {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 190px;
+    height: 190px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(155, 92, 255, 0.20),
+            rgba(155, 92, 255, 0.06) 35%,
+            transparent 70%
+        );
+
+    filter: blur(12px);
+
+    animation:
+        projectOrb 7s ease-in-out infinite alternate;
+}
+
+
+/* ========================================
+   ROTATING GRID
+======================================== */
+
+.visual-grid {
+    position: absolute;
+
+    inset: 20px;
+
+    border: 1px solid rgba(155, 92, 255, 0.10);
+
+    transform: rotate(45deg);
+
+    animation:
+        projectGrid 15s linear infinite;
+}
+
+
+/* ========================================
+   PROJECT ANIMATIONS
+======================================== */
+
+@keyframes projectOrb {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.9);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.15);
+    }
+}
+
+
+@keyframes projectGrid {
+
+    from {
+        transform: rotate(45deg);
+    }
+
+    to {
+        transform: rotate(405deg);
+    }
+}
+
+
+/* ========================================
+   MOBILE WORK
+======================================== */
+
+@media (max-width: 768px) {
+
+    .gastornis-work {
+        padding: 80px 0;
+    }
+
+
+    .work-heading {
+        margin-bottom: 50px;
+    }
+
+
+    .work-heading h2 {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+    }
+
+
+    .work-intro {
+        margin-top: 25px;
+        font-size: 0.9rem;
+    }
+
+
+    .work-list {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+
+    .work-card {
+        min-height: 420px;
+        padding: 22px;
+    }
+
+
+    .work-card-top {
+        grid-template-columns: 40px 1fr auto;
+        gap: 8px;
+    }
+
+
+    .work-category {
+        font-size: 0.55rem;
+    }
+
+
+    .work-card-content {
+        left: 22px;
+    right: 22px;
+    bottom: 22px;
+
+    margin: 0;
+    }
+
+
+    .work-card-content h3 {
+        font-size: 2.35rem;
+    }
+
+
+    .work-card-content p {
+        font-size: 0.85rem;
+        margin-top: 18px;
+    }
+
+
+    .work-button {
+        margin-top: 22px;
+    }
+
+
+    .work-card-visual {
+        top: 42px;
+        right: 25px;
+
+        width: 160px;
+        height: 160px;
+    }
+
+
+    .visual-orb {
+        width: 115px;
+        height: 115px;
+    }
+
+}
+
+
+/* ========================================
+   WORK SCROLL REVEAL
+======================================== */
+
+.work-reveal {
+    transform: translateY(50px) scale(0.97);
+
+    transition:
+        transform 0.8s ease;
+}
+
+
+/* ========================================
+   WORK REVEALED
+======================================== */
+
+.work-reveal.reveal-visible {
+    transform: translateY(0) scale(1);
+}

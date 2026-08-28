@@ -1,0 +1,25 @@
+
+/* ========================================
+   SCROLL REVEAL
+======================================== */
+
+.scroll-reveal {
+    opacity: 0;
+
+    transform: translateY(50px);
+
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s ease;
+}
+
+
+/* ========================================
+   REVEALED STATE
+======================================== */
+
+.scroll-reveal.reveal-visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}

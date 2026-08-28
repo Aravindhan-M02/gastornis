@@ -1,0 +1,763 @@
+
+
+/* ========================================
+  GASTORNIS HERO
+======================================== */
+
+.gastornis-hero {
+  position: relative;
+
+  min-height: calc(100vh - 77px);
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background: #050505;
+}
+
+
+/* ========================================
+  HERO CONTENT
+======================================== */
+
+.hero-content {
+  max-width: 950px;
+  margin: 0 auto;
+
+  text-align: center;
+
+  padding: 100px 0;
+}
+
+
+/* ========================================
+  EYEBROW
+======================================== */
+
+.hero-eyebrow {
+  margin-bottom: 28px;
+
+  color: #9b5cff;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+}
+
+
+/* ========================================
+  HERO HEADING
+======================================== */
+
+.hero-content h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+
+  font-weight: 600;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.06em;
+}
+
+
+/* Highlighted heading text */
+
+/* ========================================
+  HERO WORDS
+======================================== */
+
+.hero-content h1 .hero-word {
+  display: inline-block;
+
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  color: #ffffff;
+
+  animation-fill-mode: forwards;
+}
+
+
+/* ========================================
+  HERO WORD ANIMATION
+======================================== */
+
+.hero-content h1.hero-loaded .hero-word {
+
+  animation:
+      heroWordReveal 0.9s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      forwards;
+
+}
+
+
+.hero-content h1.hero-loaded .hero-word:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.hero-content h1.hero-loaded .hero-word:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.hero-content h1.hero-loaded .hero-word:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.hero-content h1.hero-loaded .hero-word:nth-child(4) {
+  animation-delay: 360ms;
+}
+
+
+/* ========================================
+  GRADIENT WORD
+======================================== */
+
+.hero-content h1 .gradient-word {
+
+  color: transparent;
+
+  background:
+      linear-gradient(
+          90deg,
+          #ffffff,
+          #9b5cff,
+          #ffffff
+      );
+
+  background-size: 200% auto;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  animation: none;
+}
+
+
+.hero-content h1.hero-loaded .gradient-word {
+
+  animation:
+      heroWordReveal 0.9s
+      cubic-bezier(0.22, 1, 0.36, 1)
+      forwards,
+      heroGradient 6s linear infinite;
+
+  animation-delay: 360ms, 0ms;
+
+}
+
+
+/* ========================================
+  GRADIENT ANIMATION
+======================================== */
+
+@keyframes heroGradient {
+
+  0% {
+      background-position: 0% center;
+  }
+
+  100% {
+      background-position: 200% center;
+  }
+
+}
+
+
+/* ========================================
+  HERO DESCRIPTION
+======================================== */
+
+.hero-description {
+  max-width: 680px;
+
+  margin: 36px auto 0;
+
+  color: #a3a3a3;
+
+  font-size: 1.05rem;
+
+  line-height: 1.8;
+}
+
+
+/* ========================================
+  HERO BUTTONS
+======================================== */
+
+.hero-actions {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-top: 42px;
+}
+
+
+/* Primary */
+
+.hero-primary-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px 24px;
+
+  background: #9b5cff;
+
+  border: 1px solid #9b5cff;
+
+  border-radius: 6px;
+
+  color: #ffffff;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      background 0.3s ease;
+}
+
+.hero-primary-button:hover {
+  background: #a66cff;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+      0 15px 40px rgba(155, 92, 255, 0.3);
+}
+
+
+/* Arrow */
+
+.hero-primary-button span {
+  transition: transform 0.3s ease;
+}
+
+.hero-primary-button:hover span {
+  transform: translateX(5px);
+}
+
+
+/* Secondary */
+
+.hero-secondary-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: 14px 4px;
+
+  color: #a3a3a3;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+      color 0.3s ease,
+      transform 0.3s ease;
+}
+
+.hero-secondary-button:hover {
+  color: #ffffff;
+
+  transform: translateX(3px);
+}
+
+
+/* ========================================
+  MOBILE HERO
+======================================== */
+
+@media (max-width: 768px) {
+
+  .gastornis-hero {
+      min-height: calc(100vh - 70px);
+  }
+
+  .hero-content {
+      padding: 80px 20px;
+  }
+
+  .hero-eyebrow {
+      font-size: 0.65rem;
+
+      letter-spacing: 0.18em;
+
+      margin-bottom: 24px;
+  }
+
+  .hero-content h1 {
+      font-size: clamp(3rem, 14vw, 5rem);
+
+      line-height: 0.98;
+
+      letter-spacing: -0.05em;
+  }
+
+  .hero-description {
+      margin-top: 28px;
+
+      font-size: 0.95rem;
+
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        gap: 14px;
+
+        margin-top: 34px;
+    }
+
+    .hero-primary-button {
+        width: 100%;
+
+        justify-content: center;
+
+        max-width: 280px;
+    }
+
+}
+
+
+/* ========================================
+   HERO ANIMATED BACKGROUND
+======================================== */
+
+.gastornis-hero {
+    position: relative;
+
+    min-height: calc(100vh - 77px);
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: #050505;
+}
+
+
+/* ========================================
+   BACKGROUND LAYER
+======================================== */
+
+.hero-background {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* ========================================
+   VIOLET ATMOSPHERIC GLOW
+======================================== */
+
+.hero-glow {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: 0.35;
+
+    animation: floatingGlow 10s ease-in-out infinite alternate;
+}
+
+.hero-glow-one {
+    width: 500px;
+    height: 500px;
+
+    top: 10%;
+    left: 15%;
+
+    background: rgba(155, 92, 255, 0.25);
+}
+
+.hero-glow-two {
+    width: 400px;
+    height: 400px;
+
+    right: 10%;
+    bottom: 5%;
+
+    background: rgba(110, 60, 220, 0.2);
+
+    animation-delay: -5s;
+}
+
+
+/* ========================================
+   GEOMETRIC ORBITS
+======================================== */
+
+.hero-orbit {
+    position: absolute;
+
+    border: 1px solid rgba(155, 92, 255, 0.15);
+
+    border-radius: 50%;
+
+    animation: orbitFloat 15s linear infinite;
+}
+
+.orbit-one {
+    width: 650px;
+    height: 650px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) rotate(20deg);
+}
+
+.orbit-two {
+    width: 850px;
+    height: 350px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%) rotate(-25deg);
+
+    animation-duration: 20s;
+    animation-direction: reverse;
+}
+
+
+/* ========================================
+   ORBIT ANIMATION
+======================================== */
+
+@keyframes orbitFloat {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(360deg);
+    }
+
+}
+
+
+/* ========================================
+   FLOATING DOTS
+======================================== */
+
+.hero-dot {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #9b5cff;
+
+    box-shadow:
+        0 0 15px rgba(155, 92, 255, 0.8);
+
+    animation: dotFloat 6s ease-in-out infinite;
+}
+
+.dot-one {
+    top: 25%;
+    left: 25%;
+}
+
+.dot-two {
+    top: 65%;
+    right: 25%;
+
+    animation-delay: -2s;
+}
+
+.dot-three {
+    top: 35%;
+    right: 15%;
+
+    animation-delay: -4s;
+}
+
+@keyframes dotFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-25px);
+        opacity: 1;
+    }
+
+}
+
+
+/* ========================================
+   KEEP CONTENT ABOVE BACKGROUND
+======================================== */
+
+.hero-container {
+    position: relative;
+
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+
+    .hero-glow-one {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero-glow-two {
+        width: 250px;
+        height: 250px;
+    }
+
+    .orbit-one {
+        width: 400px;
+        height: 400px;
+    }
+
+    .orbit-two {
+        width: 500px;
+        height: 220px;
+    }
+
+}
+
+
+/* ========================================
+   HERO TEXT REVEAL
+======================================== */
+
+.hero-eyebrow span {
+
+    display: inline-block;
+
+    opacity: 0;
+
+    transform: translateY(12px);
+
+}
+
+
+.hero-eyebrow.hero-loaded span {
+
+    animation: heroLetterReveal 0.6s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+
+}
+
+
+@keyframes heroLetterReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* ========================================
+   HERO LETTER REVEAL
+======================================== */
+
+.hero-letter-group {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+
+.hero-letter {
+    display: inline-block;
+
+    opacity: 0;
+
+    transform: translateY(35px);
+
+    color: #ffffff;
+}
+
+
+/* ========================================
+   LETTER ANIMATION
+======================================== */
+
+.hero-content h1.hero-loaded .hero-letter {
+
+    animation:
+        heroLetterReveal 0.7s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+
+}
+
+
+@keyframes heroLetterReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* ========================================
+   HERO DESCRIPTION REVEAL
+======================================== */
+
+.hero-description {
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+    transition-delay: 700ms;
+}
+
+
+.hero-description-visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* ========================================
+   HERO BUTTON REVEAL
+======================================== */
+
+.hero-actions {
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+    transition-delay: 900ms;
+}
+
+
+.hero-actions-visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* ========================================
+   MOVES FORWARD - ANIMATED PURPLE LIGHT
+======================================== */
+
+.gradient-word .hero-letter {
+    color: transparent;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #ffffff 35%,
+            #9b5cff 50%,
+            #ffffff 65%,
+            #ffffff 100%
+        );
+
+    background-size: 250% 100%;
+    background-position: 200% center;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    animation: none;
+}
+
+
+/* ========================================
+   PURPLE LIGHT ROLL
+======================================== */
+
+.hero-content h1.hero-loaded .gradient-word .hero-letter {
+
+    animation:
+        heroLetterReveal 0.7s
+            cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        purpleLightRoll 4s ease-in-out infinite;
+
+}
+
+
+/* ========================================
+   PURPLE LIGHT MOVEMENT
+======================================== */
+
+@keyframes purpleLightRoll {
+
+    0% {
+        background-position: 200% center;
+    }
+
+    50% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: -200% center;
+    }
+
+}

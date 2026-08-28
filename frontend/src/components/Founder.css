@@ -1,0 +1,1054 @@
+
+/* =========================================================
+   GASTORNIS — FOUNDER SECTION
+   FINAL VERSION
+   ========================================================= */
+
+.gastornis-founder {
+    position: relative;
+    padding: 140px 0;
+    background: #050505;
+    overflow: hidden;
+    border-top: 1px solid #181818;
+}
+
+
+/* =========================================================
+   FOUNDER GRID
+   ========================================================= */
+
+.founder-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 80px;
+}
+
+
+/* =========================================================
+   FOUNDER CONTENT
+   ========================================================= */
+
+.founder-content {
+    width: 100%;
+    max-width: 900px;
+}
+
+
+/* =========================================================
+   FOUNDER TITLE
+   ========================================================= */
+
+.gastornis-founder .founder-title {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+
+    color: #ffffff;
+
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 600;
+
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   TITLE LINES
+   ========================================================= */
+
+/*
+   IMPORTANT:
+   Do NOT use width: max-content here.
+   That was causing GASTORNIS to break on desktop.
+*/
+
+.founder-title-line {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+
+    width: 100%;
+    max-width: 100%;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TITLE WORDS
+   ========================================================= */
+
+.founder-title-word {
+    display: inline-block !important;
+
+    white-space: nowrap !important;
+
+    flex: 0 0 auto;
+}
+
+
+/* Space between words */
+
+.founder-title-word + .founder-title-word {
+    margin-left: 0.3em;
+}
+
+
+/* =========================================================
+   TITLE LETTERS
+   ========================================================= */
+
+.founder-letter {
+    display: inline-block;
+
+    white-space: pre;
+
+    opacity: 0;
+    transform: translateY(35px);
+
+    animation-fill-mode: forwards;
+}
+
+
+/* =========================================================
+   TITLE LETTER REVEAL
+   ========================================================= */
+
+.scroll-reveal.reveal-visible .founder-letter {
+    animation:
+        founderLetterReveal
+        0.7s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards;
+}
+
+
+@keyframes founderLetterReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   GASTORNIS GRADIENT
+   ========================================================= */
+
+.gastornis-founder .founder-gradient .founder-letter {
+    color: transparent;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #ffffff 35%,
+            #9b5cff 50%,
+            #ffffff 65%,
+            #ffffff 100%
+        );
+
+    background-size: 250% 100%;
+    background-position: 200% center;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+
+/* =========================================================
+   PURPLE LIGHT ROLL
+   ========================================================= */
+
+.scroll-reveal.reveal-visible
+.founder-gradient
+.founder-letter {
+
+    animation:
+        founderLetterReveal
+        0.7s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards,
+        founderPurpleRoll
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes founderPurpleRoll {
+
+    0% {
+        background-position: 200% center;
+    }
+
+    50% {
+        background-position: 0% center;
+    }
+
+    100% {
+        background-position: -200% center;
+    }
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.founder-description {
+    width: 100%;
+    max-width: 650px;
+
+    margin-top: 35px;
+
+    color: #8f8f8f;
+
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   FOUNDER INFO
+   ========================================================= */
+
+.founder-info {
+    margin-top: 45px;
+    padding-top: 28px;
+
+    border-top: 1px solid #242424;
+}
+
+
+/* =========================================================
+   FOUNDER NAME
+   ========================================================= */
+
+/*
+   IMPORTANT:
+   We target ONLY the actual letters.
+   The old `.founder-name span` rule was hiding
+   the parent word containers.
+*/
+
+.gastornis-founder .founder-info .founder-name {
+    display: block;
+
+    margin: 0 0 16px;
+
+    color: #ffffff;
+
+    font-size: 2.8rem;
+    font-weight: 700;
+
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+
+    white-space: nowrap;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   FOUNDER NAME WORDS
+   ========================================================= */
+
+.founder-name-word {
+    display: inline-block;
+
+    white-space: nowrap;
+}
+
+
+/* Space between ARAVINDHAN and M */
+
+.founder-name-word + .founder-name-word {
+    margin-left: 0.35em;
+}
+
+
+/* =========================================================
+   FOUNDER NAME LETTERS
+   ========================================================= */
+
+.gastornis-founder
+.founder-info
+.founder-name-letter {
+
+    display: inline-block;
+
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    color: transparent;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff 0%,
+            #ffffff 35%,
+            #9b5cff 50%,
+            #ffffff 65%,
+            #ffffff 100%
+        );
+
+    background-size: 250% 100%;
+    background-position: 200% center;
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    animation-fill-mode: forwards;
+}
+
+
+/* =========================================================
+   FOUNDER NAME REVEAL
+   ========================================================= */
+
+.scroll-reveal.reveal-visible
+.founder-name-letter {
+
+    animation:
+        founderNameReveal
+        0.6s
+        cubic-bezier(0.22, 1, 0.36, 1)
+        forwards,
+        founderPurpleRoll
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes founderNameReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   FOUNDER ROLE
+   ========================================================= */
+
+.gastornis-founder
+.founder-info
+.founder-role {
+
+    display: block;
+
+    margin-top: 12px;
+
+    color: #9b5cff;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+    transition-delay: 600ms;
+}
+
+
+.scroll-reveal.reveal-visible
+.founder-role {
+
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SOCIAL LINKS
+   ========================================================= */
+
+.founder-links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 25px;
+
+    margin-top: 30px;
+}
+
+
+.founder-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #888888;
+
+    font-size: 0.85rem;
+
+    text-decoration: none;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.founder-link span {
+    color: #9b5cff;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.founder-link:hover {
+    color: #ffffff;
+
+    transform: translateX(3px);
+}
+
+
+.founder-link:hover span {
+    transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   FOUNDER VISUAL
+   ========================================================= */
+
+.founder-visual {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 500px;
+}
+
+
+/* =========================================================
+   FOUNDER IMAGE WRAPPER
+   ========================================================= */
+
+.founder-image-wrapper {
+    position: relative;
+
+    z-index: 2;
+
+    width: 380px;
+    height: 380px;
+
+    padding: 6px;
+
+    border: 1px solid rgba(155, 92, 255, 0.45);
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(155, 92, 255, 0.25),
+            rgba(255, 255, 255, 0.03)
+        );
+
+    box-shadow:
+        0 0 70px rgba(155, 92, 255, 0.12);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+
+.founder-image-wrapper:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 80px rgba(155, 92, 255, 0.2);
+}
+
+
+/* =========================================================
+   FOUNDER IMAGE
+   ========================================================= */
+
+.founder-image {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   FOUNDER ORBIT
+   ========================================================= */
+
+.founder-orbit {
+
+    position: absolute;
+
+    width: 470px;
+    height: 470px;
+
+    border:
+        1px solid
+        rgba(155, 92, 255, 0.12);
+
+    border-radius: 50%;
+
+    animation:
+        founderOrbit
+        18s
+        linear
+        infinite;
+}
+
+
+@keyframes founderOrbit {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   KEEP SCROLL REVEAL CONTENT VISIBLE
+   ========================================================= */
+
+.gastornis-founder
+.scroll-reveal.reveal-visible {
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   MOBILE — 768px
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    /* -----------------------------------------------------
+       SECTION
+       ----------------------------------------------------- */
+
+    .gastornis-founder {
+
+        padding:
+            75px
+            0
+            70px;
+
+        overflow: hidden;
+    }
+
+
+    /* -----------------------------------------------------
+       GRID
+       ----------------------------------------------------- */
+
+    .founder-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+
+    /* -----------------------------------------------------
+       CONTENT
+       ----------------------------------------------------- */
+
+    .founder-content {
+
+        width: 100%;
+        max-width: 100%;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE TITLE
+       ----------------------------------------------------- */
+
+    .gastornis-founder .founder-content h2 {
+
+        width: 100%;
+        max-width: 100%;
+
+        font-size:
+            clamp(
+                2.55rem,
+                10.5vw,
+                4rem
+            );
+
+        line-height: 0.98;
+
+        letter-spacing: -0.055em;
+
+        overflow: visible;
+    }
+
+
+    /*
+       Each line is now allowed to contain
+       only the words that fit.
+
+       The JSX already has:
+       Line 1 = The person
+       Line 2 = behind GASTORNIS.
+
+       We allow the second line to wrap naturally,
+       BUT NEVER allow a word itself to break.
+    */
+
+    .founder-title-line {
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        width: 100%;
+        max-width: 100%;
+
+        align-items: baseline;
+
+        column-gap: 0.25em;
+        row-gap: 0;
+
+        white-space: normal;
+    }
+
+
+    /* Every individual word stays intact */
+
+    .founder-title-word {
+
+        display: inline-block !important;
+
+        flex: 0 0 auto;
+
+        white-space: nowrap !important;
+    }
+
+
+    /*
+       Remove the old forced width behaviour.
+       This is what prevents GASTORNIS from becoming
+       GASTOR / NIS.
+    */
+
+    .founder-title-line.founder-gradient {
+
+        width: 100%;
+
+        max-width: 100%;
+
+        flex-wrap: wrap;
+    }
+
+
+    /* -----------------------------------------------------
+       DESCRIPTION
+       ----------------------------------------------------- */
+
+    .founder-description {
+
+        width: 100%;
+        max-width: 100%;
+
+        margin-top: 28px;
+
+        font-size: 0.95rem;
+
+        line-height: 1.75;
+    }
+
+
+    /* -----------------------------------------------------
+       FOUNDER INFO
+       ----------------------------------------------------- */
+
+    .founder-info {
+
+        margin-top: 38px;
+
+        padding-top: 23px;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE NAME
+       ----------------------------------------------------- */
+
+    .gastornis-founder
+    .founder-info
+    .founder-name {
+
+        width: 100%;
+        max-width: 100%;
+
+        margin:
+            0
+            0
+            14px;
+
+        font-size:
+            clamp(
+                1.65rem,
+                7vw,
+                2.2rem
+            ) !important;
+
+        line-height: 1.1;
+
+        letter-spacing: 0.045em;
+
+        white-space: nowrap;
+
+        overflow: visible;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE NAME WORDS
+       ----------------------------------------------------- */
+
+    .founder-name-word {
+
+        display: inline-block;
+
+        white-space: nowrap;
+    }
+
+
+    .founder-name-word + .founder-name-word {
+
+        margin-left: 0.25em;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE ROLE
+       ----------------------------------------------------- */
+
+    .gastornis-founder
+    .founder-info
+    .founder-role {
+
+        margin-top: 10px;
+
+        font-size: 0.82rem !important;
+
+        line-height: 1.5;
+
+        letter-spacing: 0.14em;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE LINKS
+       ----------------------------------------------------- */
+
+    .founder-links {
+
+        margin-top: 25px;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 22px;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE VISUAL
+       ----------------------------------------------------- */
+
+    .founder-visual {
+
+        width: 100%;
+
+        min-height: 320px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE PHOTO
+       ----------------------------------------------------- */
+
+    .founder-image-wrapper {
+
+        width: 260px;
+        height: 260px;
+
+        padding: 5px;
+
+        position: relative;
+
+        z-index: 2;
+    }
+
+
+    .founder-image {
+
+        width: 100%;
+        height: 100%;
+
+        display: block;
+
+        object-fit: cover;
+
+        border-radius: 50%;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE ORBIT
+       ----------------------------------------------------- */
+
+    .founder-orbit {
+
+        position: absolute;
+
+        width: 315px;
+        height: 315px;
+
+        top: 50%;
+        left: 50%;
+
+        transform:
+            translate(-50%, -50%);
+
+        z-index: 1;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .gastornis-founder {
+
+        padding:
+            65px
+            0
+            60px;
+    }
+
+
+    /* -----------------------------------------------------
+       SMALL MOBILE TITLE
+       ----------------------------------------------------- */
+
+    .gastornis-founder
+    .founder-content
+    h2 {
+
+        font-size:
+            clamp(
+                2.35rem,
+                10.8vw,
+                3.2rem
+            );
+
+        line-height: 0.98;
+
+        letter-spacing: -0.055em;
+    }
+
+
+    /*
+       This makes sure:
+
+       The person
+
+       behind
+
+       GASTORNIS.
+
+       can happen naturally without breaking
+       GASTORNIS itself.
+    */
+
+    .founder-title-line {
+
+        flex-wrap: wrap;
+
+        column-gap: 0.22em;
+
+        row-gap: 0;
+    }
+
+
+    .founder-title-word {
+
+        white-space: nowrap !important;
+
+        flex-shrink: 0;
+    }
+
+
+    /* -----------------------------------------------------
+       SMALL MOBILE DESCRIPTION
+       ----------------------------------------------------- */
+
+    .founder-description {
+
+        font-size: 0.92rem;
+
+        line-height: 1.75;
+
+        margin-top: 25px;
+    }
+
+
+    /* -----------------------------------------------------
+       SMALL MOBILE NAME
+       ----------------------------------------------------- */
+
+    .gastornis-founder
+    .founder-info
+    .founder-name {
+
+        font-size: 1.65rem !important;
+
+        letter-spacing: 0.035em !important;
+
+        white-space: nowrap;
+    }
+
+
+    /* -----------------------------------------------------
+       SMALL MOBILE ROLE
+       ----------------------------------------------------- */
+
+    .founder-info .founder-role {
+
+        font-size: 0.75rem !important;
+
+        letter-spacing: 0.12em !important;
+    }
+
+
+    /* -----------------------------------------------------
+       SMALL MOBILE PHOTO
+       ----------------------------------------------------- */
+
+    .founder-image-wrapper {
+
+        width: 240px;
+        height: 240px;
+    }
+
+
+    .founder-orbit {
+
+        width: 295px;
+        height: 295px;
+    }
+
+}
+
+
+ /* ========================================
+   MOBILE — REMOVE SPACE WHEN GASTORNIS
+   MOVES TO ITS OWN LINE
+======================================== */
+
+@media (max-width: 768px) {
+
+   .gastornis-founder
+    .founder-title-line.founder-gradient
+    .founder-title-word + .founder-title-word {
+        margin-left: 0;
+    }
+
+} 
+
+
+/* ========================================
+   FOUNDER REVEAL
+======================================== */
+
+.founder-photo-reveal {
+    transform: translateX(-60px) scale(0.96);
+}
+
+.founder-photo-reveal.reveal-visible {
+    transform: translateX(0) scale(1);
+}
+
+
+.founder-content-reveal {
+    transform: translateX(60px);
+}
+
+.founder-content-reveal.reveal-visible {
+    transform: translateX(0);
+}

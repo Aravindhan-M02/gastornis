@@ -1,0 +1,222 @@
+/* ========================================
+   HIDE DEFAULT CURSOR
+======================================== */
+
+html,
+body,
+* {
+    cursor: none !important;
+}
+
+/* ========================================
+   GASTORNIS PARTICLE CURSOR
+======================================== */
+
+.gastornis-cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2147483647;
+}
+
+
+/* ========================================
+   CURSOR CORE
+======================================== */
+
+.cursor-core {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+
+    background: #b46cff;
+
+    box-shadow:
+        0 0 6px #9b5cff,
+        0 0 14px rgba(155, 92, 255, 1),
+        0 0 28px rgba(155, 92, 255, 0.8),
+        0 0 45px rgba(155, 92, 255, 0.45);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ========================================
+   SOFT CURSOR GLOW
+======================================== */
+
+.cursor-glow {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: rgba(155, 92, 255, 0.12);
+
+    filter: blur(10px);
+
+    opacity: 1;
+}
+
+
+/* ========================================
+   PARTICLE CONTAINER
+======================================== */
+
+.cursor-particles {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 99998;
+}
+
+
+/* ========================================
+   PARTICLES
+======================================== */
+
+.cursor-particle {
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: #9b5cff;
+
+    box-shadow:
+        0 0 8px rgba(155, 92, 255, 0.7);
+
+    animation: cursorParticleFade 0.7s ease-out forwards;
+}
+
+
+/* ========================================
+   PARTICLE FADE
+======================================== */
+
+@keyframes cursorParticleFade {
+
+    0% {
+        opacity: 0.75;
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(-50%, -50%)
+            scale(0.15);
+    }
+}
+
+
+/* ========================================
+   INTERACTIVE ELEMENTS
+======================================== */
+
+.gastornis-cursor.cursor-hover .cursor-core {
+    transform:
+        translate(-50%, -50%)
+        scale(1.7);
+
+    box-shadow:
+        0 0 8px #b46cff,
+        0 0 18px rgba(155, 92, 255, 1),
+        0 0 35px rgba(155, 92, 255, 0.9),
+        0 0 60px rgba(155, 92, 255, 0.5);
+}
+
+.gastornis-cursor.cursor-hover .cursor-glow {
+    width: 58px;
+    height: 58px;
+    background: rgba(155, 92, 255, 0.16);
+}
+
+/* ========================================
+   MOBILE / TOUCH DEVICES
+======================================== */
+
+@media (hover: none), (pointer: coarse) {
+
+    html,
+    body,
+    * {
+        cursor: auto !important;
+    }
+
+    .gastornis-cursor,
+    .cursor-particles {
+        display: none;
+    }
+
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .gastornis-cursor,
+    .cursor-particle {
+        animation: none;
+        transition: none;
+    }
+
+}
+
+/* ========================================
+   GASTORNIS CUSTOM CURSOR
+   Prevent browser cursor flash during navigation
+======================================== */
+
+html,
+body,
+#root {
+    cursor: none;
+}
+
+/* Keep the normal browser cursor hidden
+   on interactive elements too */
+a,
+button,
+input,
+textarea,
+select,
+label {
+    cursor: none;
+}
+
+/* Cursor is invisible until the first
+   mouse movement is detected */
+.gastornis-cursor {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Show custom cursor after mouse movement */
+.gastornis-cursor.cursor-ready {
+    opacity: 1;
+}

@@ -1,0 +1,12 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================================================
+   GLOBAL APP LAYER
+   ========================================================= */
+
+#root {
+    position: relative;
+    z-index: auto;
+}

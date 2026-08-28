@@ -1,0 +1,156 @@
+
+/* ========================================
+   ABOUT
+======================================== */
+
+.gastornis-about {
+    padding: 110px 0;
+
+    background: #050505;
+
+    border-top: 1px solid #181818;
+}
+
+
+.about-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 2fr;
+
+    gap: 100px;
+}
+
+
+.about-label {
+    padding-top: 10px;
+}
+
+
+.about-content {
+    max-width: 850px;
+}
+
+
+.about-content h2 {
+    margin: 0;
+
+    font-size: clamp(3rem, 6vw, 6rem);
+
+    font-weight: 600;
+
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+}
+
+
+.about-content h2 span {
+    color: #666666;
+}
+
+
+.about-content > p {
+    max-width: 650px;
+
+    margin-top: 35px;
+
+    color: #8f8f8f;
+
+    font-size: 1rem;
+
+    line-height: 1.8;
+}
+
+
+.about-statement {
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    margin-top: 55px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #242424;
+}
+
+
+.about-statement span {
+    color: #9b5cff;
+
+    font-size: 0.75rem;
+
+    font-weight: 600;
+}
+
+
+.about-statement p {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* ========================================
+   MOBILE ABOUT
+======================================== */
+
+@media (max-width: 768px) {
+
+    .gastornis-about {
+        padding: 85px 0;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+    .about-content h2 {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+    }
+
+    .about-content > p {
+        margin-top: 25px;
+
+        font-size: 0.95rem;
+    }
+
+    .about-statement {
+        margin-top: 40px;
+
+        gap: 20px;
+    }
+
+}
+
+
+/* ========================================
+   ABOUT REVEAL
+======================================== */
+
+.about-label-reveal {
+    transform: translateX(-35px);
+}
+
+.about-label-reveal.reveal-visible {
+    transform: translateX(0);
+}
+
+
+.about-content-reveal {
+    transform: translateY(40px);
+}
+
+.about-content-reveal.reveal-visible {
+    transform: translateY(0);
+}

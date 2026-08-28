@@ -1,0 +1,322 @@
+
+/* ========================================
+   SERVICES
+======================================== */
+
+.gastornis-services {
+    position: relative;
+
+    padding: 120px 0;
+
+    background: #050505;
+}
+
+
+/* ========================================
+   SERVICES HEADING
+======================================== */
+
+.services-heading {
+    max-width: 850px;
+
+    margin-bottom: 70px;
+}
+
+.section-eyebrow {
+    margin-bottom: 25px;
+
+    color: #9b5cff;
+
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    letter-spacing: 0.25em;
+
+    text-transform: uppercase;
+}
+
+.services-heading h2 {
+    margin: 0;
+
+    font-size: clamp(3rem, 6vw, 6rem);
+
+    font-weight: 600;
+
+    line-height: 0.98;
+
+    letter-spacing: -0.055em;
+
+    color: #ffffff;
+}
+
+.services-heading h2 span {
+    color: #666666;
+}
+
+.services-intro {
+    max-width: 600px;
+
+    margin-top: 35px;
+
+    color: #8f8f8f;
+
+    font-size: 1rem;
+
+    line-height: 1.8;
+}
+
+
+/* ========================================
+   SERVICES LIST
+======================================== */
+
+.services-list {
+    border-top: 1px solid #242424;
+}
+
+
+/* ========================================
+   SERVICE ITEM
+======================================== */
+
+.service-item {
+    display: grid;
+
+    grid-template-columns: 80px 1fr 60px;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 30px 10px;
+
+    border-bottom: 1px solid #242424;
+
+    cursor: pointer;
+
+    transition:
+        padding 0.5s ease,
+        background 0.5s ease;
+}
+
+.service-item:hover {
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(155, 92, 255, 0.06),
+            transparent
+        );
+}
+
+
+/* ========================================
+   NUMBER
+======================================== */
+
+.service-number {
+    color: #555555;
+
+    font-size: 0.8rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.1em;
+
+    transition: color 0.4s ease;
+}
+
+.service-item:hover .service-number {
+    color: #9b5cff;
+}
+
+
+/* ========================================
+   SERVICE INFO
+======================================== */
+
+.service-info h3 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+
+    font-weight: 500;
+
+    letter-spacing: -0.025em;
+
+    transition:
+        transform 0.4s ease,
+        color 0.4s ease;
+}
+
+.service-item:hover .service-info h3 {
+    transform: translateX(8px);
+}
+
+.service-info p {
+    max-width: 600px;
+
+    margin: 10px 0 0;
+
+    color: #777777;
+
+    font-size: 0.9rem;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   ARROW
+======================================== */
+
+.service-arrow {
+    color: #555555;
+
+    font-size: 1.5rem;
+
+    text-align: right;
+
+    transition:
+        color 0.4s ease,
+        transform 0.4s ease;
+}
+
+.service-item:hover .service-arrow {
+    color: #9b5cff;
+
+    transform: translateX(8px);
+}
+
+
+/* ========================================
+   MOBILE SERVICES
+======================================== */
+
+@media (max-width: 768px) {
+
+    .gastornis-services {
+        padding: 90px 0;
+    }
+
+    .services-heading {
+        margin-bottom: 55px;
+    }
+
+    .services-heading h2 {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+    }
+
+    .services-intro {
+        margin-top: 25px;
+
+        font-size: 0.95rem;
+    }
+
+    .service-item {
+        grid-template-columns: 45px 1fr 30px;
+
+        gap: 15px;
+
+        padding: 26px 5px;
+    }
+
+    .service-item:hover {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .service-info h3 {
+        font-size: 1.25rem;
+    }
+
+    .service-info p {
+        font-size: 0.82rem;
+    }
+
+}
+
+
+/* ========================================
+   INTERACTIVE SERVICE STATES
+======================================== */
+
+.service-item {
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        padding 0.5s ease,
+        background 0.5s ease,
+        border-color 0.5s ease;
+}
+
+
+/* Violet light */
+
+.service-item::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 100%;
+
+    background: #9b5cff;
+
+    transform: scaleY(0);
+
+    transform-origin: center;
+
+    transition: transform 0.5s ease;
+}
+
+
+/* Active state */
+
+.service-item.active {
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background:
+        radial-gradient(
+            circle at 0% 50%,
+            rgba(155, 92, 255, 0.12),
+            transparent 45%
+        );
+}
+
+.service-item.active::before {
+    transform: scaleY(1);
+}
+
+
+/* Number */
+
+.service-item.active .service-number {
+    color: #9b5cff;
+}
+
+
+/* Title */
+
+.service-item.active .service-info h3 {
+    transform: translateX(8px);
+}
+
+
+/* Arrow */
+
+.service-item.active .service-arrow {
+    color: #9b5cff;
+
+    transform: translateX(8px);
+}

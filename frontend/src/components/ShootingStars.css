@@ -1,0 +1,163 @@
+/* ========================================
+   SHOOTING STARS — GLOBAL BACKGROUND
+======================================== */
+
+.shooting-stars {
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+/* ========================================
+   SHOOTING STAR
+======================================== */
+
+.shooting-star {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 6px #ffffff,
+        0 0 12px rgba(155, 92, 255, 0.9);
+
+    opacity: 0;
+
+    transform:
+        translate3d(0, 0, 0)
+        rotate(-45deg);
+
+    animation:
+        shootingStar
+        1.5s
+        linear
+        forwards;
+}
+
+
+/* ========================================
+   STAR TRAIL
+======================================== */
+
+.shooting-star::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 1px;
+
+    right: 0;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(155, 92, 255, 0.45),
+            rgba(255, 255, 255, 0.9)
+        );
+
+    filter: blur(0.5px);
+}
+
+
+/* ========================================
+   SHOOTING ANIMATION
+======================================== */
+
+@keyframes shootingStar {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(0, 0, 0)
+            rotate(-45deg)
+            scale(0.5);
+
+    }
+
+
+    10% {
+
+        opacity: 1;
+
+    }
+
+
+    70% {
+
+        opacity: 0.9;
+
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translate3d(-280px, 280px, 0)
+            rotate(-45deg)
+            scale(1);
+
+    }
+
+}
+
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .shooting-stars {
+        display: none;
+    }
+
+}
+
+.shooting-star::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 1px;
+
+    right: 0;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    transform-origin: right center;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(155, 92, 255, 0.45),
+            rgba(255, 255, 255, 0.9)
+        );
+
+    filter: blur(0.5px);
+}
