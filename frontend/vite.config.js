@@ -5,6 +5,8 @@ export default defineConfig({
   plugins: [react()],
 
   preview: {
-    allowedHosts: ['gastornis.onrender.com'],
+    host: '0.0.0.0',
+    port: 4173,
+    allowedHosts: true,
   },
 })
