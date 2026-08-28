@@ -29,10 +29,12 @@ public class EmailService {
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
-    public EmailService(ObjectMapper objectMapper) {
-        this.httpClient = HttpClient.newHttpClient();
-        this.objectMapper = objectMapper;
-    }
+    private final ObjectMapper objectMapper;
+
+public EmailService() {
+    this.httpClient = HttpClient.newHttpClient();
+    this.objectMapper = new ObjectMapper();
+}
 
     // ============================================================
     // SEND NEW ENQUIRY NOTIFICATION TO GASTORNIS
