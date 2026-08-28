@@ -16,19 +16,23 @@ public class ProjectEnquiryService {
 
         System.out.println("=================================");
         System.out.println("NEW ENQUIRY RECEIVED");
+
         System.out.println("Name: " + enquiry.getName());
         System.out.println("Email: " + enquiry.getEmail());
         System.out.println("Phone: " + enquiry.getPhone());
         System.out.println("Project Type: " + enquiry.getProjectType());
+
         System.out.println("=================================");
 
         // ============================================================
-        // SEND NOTIFICATION EMAIL TO GASTORNIS
+        // SEND ENQUIRY NOTIFICATION TO GASTORNIS
         // ============================================================
 
         try {
 
-            System.out.println("Sending notification email...");
+            System.out.println(
+                    "Sending notification email..."
+            );
 
             emailService.sendNewEnquiryNotification(enquiry);
 
@@ -47,13 +51,13 @@ public class ProjectEnquiryService {
             /*
              * IMPORTANT:
              *
-             * We DO NOT throw the exception here.
+             * We do NOT throw the exception here.
              *
-             * If the email service is unavailable,
-             * the enquiry should still be accepted.
+             * Even if email delivery fails,
+             * the enquiry itself should still be accepted.
              *
-             * This prevents the frontend from receiving HTTP 500
-             * just because an email failed.
+             * This prevents the frontend from receiving
+             * HTTP 500 just because email delivery failed.
              */
         }
 
