@@ -1,74 +1,45 @@
 package com.gastornis.gastornisbackend.service;
 
 import com.gastornis.gastornisbackend.entity.ProjectEnquiry;
+import com.gastornis.gastornisbackend.repository.ProjectEnquiryRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectEnquiryService {
 
+    private final ProjectEnquiryRepository repository;
     private final EmailService emailService;
 
-    public ProjectEnquiryService(EmailService emailService) {
+    public ProjectEnquiryService(
+            ProjectEnquiryRepository repository,
+            EmailService emailService) {
+
+        this.repository = repository;
         this.emailService = emailService;
     }
 
     public ProjectEnquiry saveEnquiry(ProjectEnquiry enquiry) {
 
-        System.out.println("=================================");
-        System.out.println("NEW ENQUIRY RECEIVED");
+        // 1. Save to the database first, always
+        ProjectEnquiry savedEnquiry = repository.save(enquiry);
 
-        System.out.println("Name: " + enquiry.getName());
-        System.out.println("Email: " + enquiry.getEmail());
-        System.out.println("Phone: " + enquiry.getPhone());
-        System.out.println("Project Type: " + enquiry.getProjectType());
-
-        System.out.println("=================================");
-
-        // ============================================================
-        // SEND ENQUIRY NOTIFICATION TO GASTORNIS
-        // ============================================================
-
+        // 2. Notify Gastornis inbox (best-effort — don't fail the whole
+        //    request just because the email couldn't be sent)
         try {
-
-            System.out.println(
-                    "Sending notification email..."
+            emailService.sendNewEnquiryNotification(savedEnquiry);
+        } catch (RuntimeException e) {
+            // Enquiry is already saved in the DB, so we don't lose the
+            // lead even if the email send fails (e.g. mail server hiccup).
+            System.err.println(
+                    "Enquiry #" + savedEnquiry.getId()
+                            + " saved, but notification email failed: "
+                            + e.getMessage()
             );
-
-            emailService.sendNewEnquiryNotification(enquiry);
-
-            System.out.println(
-                    "Notification email sent successfully."
-            );
-
-        } catch (Exception e) {
-
-            System.out.println(
-                    "WARNING: Notification email could not be sent."
-            );
-
-            e.printStackTrace();
-
-            /*
-             * IMPORTANT:
-             *
-             * We do NOT throw the exception here.
-             *
-             * Even if email delivery fails,
-             * the enquiry itself should still be accepted.
-             *
-             * This prevents the frontend from receiving
-             * HTTP 500 just because email delivery failed.
-             */
         }
 
-        // ============================================================
-        // ENQUIRY COMPLETED
-        // ============================================================
+        // NOTE: Customer confirmation email intentionally disabled for now.
+        // emailService.sendCustomerConfirmation(savedEnquiry);
 
-        System.out.println("=================================");
-        System.out.println("ENQUIRY SUCCESSFULLY PROCESSED");
-        System.out.println("=================================");
-
-        return enquiry;
+        return savedEnquiry;
     }
 }
