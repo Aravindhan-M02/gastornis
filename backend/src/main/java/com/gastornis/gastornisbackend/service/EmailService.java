@@ -2,24 +2,30 @@ package com.gastornis.gastornisbackend.service;
 
 import com.gastornis.gastornisbackend.entity.ProjectEnquiry;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmailService {
 
-    private final JavaMailSender mailSender;
-
-    @Value("${spring.mail.username}")
+    // The email address that receives new-enquiry notifications
+    // (your own Gmail address, unrelated to SMTP now).
+    @Value("${gastornis.notify-email}")
     private String fromEmail;
 
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    // Brevo (https://www.brevo.com) free-tier transactional email API.
+    // Render's free tier blocks outbound SMTP ports entirely, so we send
+    // over plain HTTPS instead — this is not blocked.
+    @Value("${brevo.api-key}")
+    private String brevoApiKey;
+
+    private final RestClient restClient =
+            RestClient.builder()
+                    .baseUrl("https://api.brevo.com/v3/smtp/email")
+                    .build();
 
     // ============================================================
     // SEND NEW ENQUIRY NOTIFICATION TO GASTORNIS
@@ -27,29 +33,43 @@ public class EmailService {
 
     public void sendNewEnquiryNotification(ProjectEnquiry enquiry) {
 
+        String subject =
+                "New GASTORNIS Project Enquiry — " + safe(enquiry.getName());
+
+        sendViaBrevo(fromEmail, subject, buildAdminEmail(enquiry));
+    }
+
+
+    // ============================================================
+    // GENERIC BREVO SEND (HTTPS API call)
+    // ============================================================
+
+    private void sendViaBrevo(String toEmail, String subject, String htmlContent) {
+
         try {
 
-            MimeMessage message = mailSender.createMimeMessage();
-
-            MimeMessageHelper helper =
-                    new MimeMessageHelper(message, true, "UTF-8");
-
-            helper.setFrom(fromEmail);
-            helper.setTo(fromEmail);
-
-            helper.setSubject(
-                    "New GASTORNIS Project Enquiry — "
-                            + safe(enquiry.getName())
+            Map<String, Object> payload = Map.of(
+                    "sender", Map.of(
+                            "name", "GASTORNIS",
+                            "email", fromEmail
+                    ),
+                    "to", List.of(Map.of("email", toEmail)),
+                    "subject", subject,
+                    "htmlContent", htmlContent
             );
 
-            helper.setText(buildAdminEmail(enquiry), true);
+            restClient.post()
+                    .header("api-key", brevoApiKey)
+                    .header("Content-Type", "application/json")
+                    .header("Accept", "application/json")
+                    .body(payload)
+                    .retrieve()
+                    .toBodilessEntity();
 
-            mailSender.send(message);
-
-        } catch (MessagingException e) {
+        } catch (Exception e) {
 
             throw new RuntimeException(
-                    "Failed to send enquiry notification email.",
+                    "Failed to send enquiry notification email via Brevo.",
                     e
             );
         }
@@ -62,31 +82,11 @@ public class EmailService {
 
     public void sendCustomerConfirmation(ProjectEnquiry enquiry) {
 
-        try {
-
-            MimeMessage message = mailSender.createMimeMessage();
-
-            MimeMessageHelper helper =
-                    new MimeMessageHelper(message, true, "UTF-8");
-
-            helper.setFrom(fromEmail);
-            helper.setTo(enquiry.getEmail());
-
-            helper.setSubject(
-                    "We've received your project enquiry — GASTORNIS"
-            );
-
-            helper.setText(buildCustomerEmail(enquiry), true);
-
-            mailSender.send(message);
-
-        } catch (MessagingException e) {
-
-            throw new RuntimeException(
-                    "Failed to send customer confirmation email.",
-                    e
-            );
-        }
+        sendViaBrevo(
+                enquiry.getEmail(),
+                "We've received your project enquiry — GASTORNIS",
+                buildCustomerEmail(enquiry)
+        );
     }
 
 
