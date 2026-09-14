@@ -164,7 +164,7 @@ function Founder() {
 
 
                                 <span className="founder-role">
-                                    FOUNDER & LEAD DEVELOPER
+                                    FOUNDER & CEO
                                 </span>
 
                             </div>
