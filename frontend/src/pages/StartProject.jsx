@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./StartProject.css";
+import { Link } from "react-router-dom";
+
 
 function StartProject() {
     const [projectType, setProjectType] = useState("");
@@ -250,24 +252,24 @@ function StartProject() {
                 HEADER
             ======================================== */}
 
-            <header className="project-header">
+           <header className="project-header">
 
-                <a
-                    href="/"
-                    className="project-brand"
-                >
-                    GASTORNIS
-                </a>
+    <Link
+        to="/"
+        className="project-brand"
+    >
+        GASTORNIS
+    </Link>
 
-                <a
-                    href="/"
-                    className="project-back"
-                >
-                    <span>←</span>
-                    Back to site
-                </a>
+    <Link
+        to="/"
+        className="project-back"
+    >
+        <span>←</span>
+        Back to site
+    </Link>
 
-            </header>
+</header>
 
 
             {/* ========================================
@@ -830,6 +832,25 @@ function StartProject() {
                 </form>
 
             </section>
+            {/* ========================================
+    SUBMITTING OVERLAY (glass effect)
+======================================== */}
+
+{isSubmitting && (
+    <div className="submitting-overlay">
+
+        <div className="submitting-glass-box">
+
+            <div className="submitting-spinner"></div>
+
+            <strong>Sending your project brief...</strong>
+
+            <p>Please don't close or refresh this page.</p>
+
+        </div>
+
+    </div>
+)}
 
 
             {/* ========================================

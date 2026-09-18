@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
+
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -9,14 +11,14 @@ function Navbar() {
             <div className="container">
 
                 {/* Logo */}
-                <a className="gastornis-logo" href="/">
-                    <img
-                        src="/gastornis-logo.png"
-                        alt="GASTORNIS Logo"
-                    />
-
-                    <span>GASTORNIS</span>
-                </a>
+                <Link className="gastornis-logo" href="/">
+    <img
+        src="/gastornis-logo.png"
+        alt="GASTORNIS Logo"
+    />
+    <span>GASTORNIS</span>
+</Link>
+            
 
 
                 {/* Mobile Menu Button */}
