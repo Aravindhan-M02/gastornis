@@ -1,6 +1,7 @@
 import React from "react";
 import ScrollReveal from "./ScrollReveal";
 import "./Contact.css";
+import { Link } from "react-router-dom";
 
 function Contact() {
     return (
@@ -93,13 +94,11 @@ function Contact() {
 
                         {/* ========================================
                             BUTTON
+                            Link, not <a> — keeps this a client-side
+                            route change so Cursor/App never remount
                         ======================================== */}
 
-                        <a
-    href="/start-project"
-    className="contact-button"
->
-
+                        <Link to="/start-project" className="contact-button">
                             <span className="button-text">
                                 Start a Project
                             </span>
@@ -108,7 +107,7 @@ function Contact() {
                                 ↗
                             </span>
 
-                        </a>
+                        </Link>
 
 
                         {/* ========================================
